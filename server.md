@@ -194,11 +194,11 @@ vscode本身自带git支持，
 
 #### 矢量图绘图工具inkscape
 
-AI的良好替代。
+Adobe Illustrator的良好替代。
 
 #### 位图编辑工具GIMP
 
-PS的良好替代。
+Adobe Photoshop的良好替代。
 
 ## 相关资源及链接
 
