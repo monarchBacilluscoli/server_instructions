@@ -224,6 +224,8 @@ make+gdb
 
 *设置了ssh免密后远程调试亦免密。*
 
+CMake设置可参见
+
 ### python
 
 #### vscode+conda
@@ -331,3 +333,7 @@ https://pgy.oray.com/download/
 4. vscode远程调试官方教程
 
 https://code.visualstudio.com/docs/remote/ssh
+
+5. CMake入门好文
+
+https://www.hahack.com/codes/cmake/
