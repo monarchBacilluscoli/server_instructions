@@ -100,7 +100,7 @@ username项填写要登录的用户名，hostname填写服务器IP。
 
 make+gdb
 
-#### vscode+cmake+ssh_remote远程调试
+#### vscode+cmake+ssh_remote 本地+远程调试
 
 在本机vscode打开远程工程，支持远程编辑+调试。远程搬砖利器，除了不能显示程序跑出来的图形，写代码/调试体验和本机使用vsocode基本无异。
 
@@ -201,7 +201,9 @@ AI的良好替代。
 PS的良好替代。
 
 ## 相关资源及链接
+
 1. linux系统目录结构  
 https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/
 
-2. 
+2. 一个基本的Linux下的vscode工程  
+https://github.com/monarchBacilluscoli/test_project_vscode_linux
