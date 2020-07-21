@@ -199,3 +199,9 @@ AI的良好替代。
 #### 位图编辑工具GIMP
 
 PS的良好替代。
+
+## 相关资源及链接
+1. linux系统目录结构  
+https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/
+
+2. 
