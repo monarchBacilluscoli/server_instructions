@@ -2,7 +2,7 @@
 
 *是否更适合使用流程式的说明而非分条的字典式说明*
 
-下为后面命令行或配置文件中出现的符号及意义
+下为后面命令行或配置文件中出现的符号及其意义
 
 |   命令中的符号  | 意义            |
 |---------------|-----------------|
@@ -11,14 +11,16 @@
 | `~` |linux下当前用户的home路径的简写|
 | `${xxx}` |代表vscode配置中某个系统预设变量（原样填写）|
 
+[TOC]
+
 ## 远程登录
 
-在服务器上直接操作固然爽快无延迟，但不支持多人+跑来跑去很麻烦，何以解忧，远程桌面。  
-大体流程是
+在服务器上直接操作固然爽快无延迟，但不支持多人&跑来跑去很麻烦。何以解忧，远程桌面。  
+大体流程如下：
 
 1. 获取服务器IP及帐号信息
 2. 选用某种远程桌面软件（命令行/图形）
-3. 输入信息，登录并使用
+3. 输入登录信息，登录并使用
 
 ### 局域网
 
@@ -35,7 +37,7 @@
 
     2. 输入 `ifconfig` 回车
 
-    3. 寻找en开头的项，其中inet即为IP地址。
+    3. 寻找en开头的项，其中inet即为IP地址，当下是172.24.151.175。
 
 注： `ifconfig` 是Unix-like系统的网络接口配置工具，常用于查看IP等设置。其中前缀en代表ethernet，通常是有线局域网，而wl则代表wireless连接，即WIFI。
 
@@ -49,17 +51,17 @@ ssh提供了命令行下的远程连接，支持多用户多会话，轻量可�
 ssh {username}@{hostname}
 ```
 
-username项填写要登录的用户名，hostname填写服务器IP。
+`username` ：要登录的用户名， `hostname` ：服务器IP
 
 然后会询问你用户的密码，输入并回车即可登录。
 
 登录后即可视同本机一般进行命令行操作。
 
-##### ssh免账户+免IP+免密
+##### ssh免密登录
 
 每次都要输入用户名IP密码进行连接非常麻烦，此处提供了免除以上操作的设置方法：
 
-###### win10
+###### win10客户机
 
 1. powershell中创建公钥：  
 
@@ -90,6 +92,40 @@ nano ~/.ssh/authorized_keys
 粘贴到所有内容的最后即可
 
 图形桌面：直接编辑该文档，粘贴至文件最后即可。
+
+###### Linux客户机
+
+1. 生成密钥（如 `~/.ssh/rsa.pub` 已经存在则跳过这步）
+
+``` 
+ssh-keygen
+```
+
+2. 直接使用该命令将公钥复制到服务器
+
+``` 
+ssh-copy-id {用户名}@{服务器IP}
+```
+
+#### ssh免帐号及IP登录
+
+在 `~/.ssh` 下创建文件名为 `config` 的文件
+修改该文件内容为：
+
+``` 
+Host HPWorkStation          
+  HostName {服务器IP} 
+  Port 22
+  User {你的用户名}
+```
+
+之后即可使用别名（HPWorkStation）登录，即
+
+``` 
+ssh HPWorkStation
+```
+
+设置了免密的话也无需输入密码
 
 #### 图形远程桌面
 
@@ -144,7 +180,7 @@ scp {本地文件} {用户名}@{服务器IP}:{服务器路径}
 
 配合手机的ssh客户端也可以使用命令行进行远程搬砖。
 
-1. 通过其他方式在服务器上打开终端（`ctrl+alt+T`）
+1. 通过其他方式在服务器上打开终端（ `ctrl+alt+T` ）
 2. 输入命令： `sudo pgyvpn`
 3. 首次登录需要输入帐号密码
 4. 根据提示，输入 `9` 即 `exit PgyVPN interface` 将pgyvpn转为后台，关闭终端
@@ -176,9 +212,12 @@ make+gdb
 
 ##### 设置流程
 
-//todo
+1. 打开 vscode，点击左侧”Extension“打开扩展栏
+2. 搜索并安装”Remote-SSH“扩展
+3. 按照提示重启vscode
+4. 点击 vscode 左下的蓝色标志，选择 Remote-SSH: Connect to Host 
 
-设置了ssh免密后远程调试亦免密。
+*设置了ssh免密后远程调试亦免密。*
 
 ### python
 
@@ -276,10 +315,14 @@ Adobe Photoshop的良好替代。
 
 https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/
 
-2. 一个基本的Linux下的vscode工程
+2. 一个基于CMake的基本的Linux下的vscode工程样板
 
 https://github.com/monarchBacilluscoli/test_project_vscode_linux
 
 3. 蒲公英VPN
 
 https://pgy.oray.com/download/
+
+4. vscode远程调试官方教程
+
+https://code.visualstudio.com/docs/remote/ssh
