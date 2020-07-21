@@ -17,4 +17,26 @@
 
 有登录人数限制。
 
+## 开发环境
+### C++
+#### 命令行调试
+#### vscode+cmake+ssh_remote远程调试
 
+### python
+#### vscode+conda
+
+### OFEC特别篇
+参见网页￥……%&
+
+## 实用工具
+### git图形工具
+#### Sourcetree
+#### vscode git 有关插件
+##### GitLens
+##### Git Graph
+### 系统工具
+#### htop
+类似windows进程管理器
+#### #……％￥……
+### 其他软件 
+### 矢量图绘图工具inkscape
