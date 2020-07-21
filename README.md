@@ -1,6 +1,6 @@
 # 服务器使用说明
 
-*是否更适合使用流程式的说明而非分条的字典式说明*
+*? 是否更适合使用流程式的说明而非分条的字典式说明*
 
 下为后面命令行或配置文件中出现的符号及其意义
 
@@ -150,9 +150,15 @@ ssh HPWorkStation
 
 部分远程桌面软件都支持直接复制粘贴文件，但有时失效，所以可能文件共享可能需要一些别的手段。
 
-##### samba共享文件夹
+##### Samba共享文件夹
 
-将共享文件夹挂载至本地电脑，可在文件管理器中直接访问。
+将服务器文件夹通过Samba共享并挂载至本地电脑，可在文件管理器中直接访问。
+
+1. 编辑samba设置
+
+``` 
+sudo nano /etc/samba/smb.conf
+```
 
 ##### scp命令
 
@@ -183,7 +189,7 @@ scp {本地文件} {用户名}@{服务器IP}:{服务器路径}
 1. 通过其他方式在服务器上打开终端（ `ctrl+alt+T` ）
 2. 输入命令： `sudo pgyvpn`
 3. 首次登录需要输入帐号密码
-4. 根据提示，输入 `9` 即 `exit PgyVPN interface` 将pgyvpn转为后台，关闭终端
+4. 根据提示，输入 `9` 即 `exit PgyVPN interface` 将 `pgyvpn` 转为后台，关闭终端
 5. 远程客户机登录同一个pgyvpn帐号，可看到服务器”HPWorkStation“的远程组网IP。相当于在同一个局域网下
 
 *相对于局域网延迟会久一点*
@@ -198,19 +204,17 @@ scp {本地文件} {用户名}@{服务器IP}:{服务器路径}
 
 ### C++
 
-服务器已预装C++调试有关工具，开箱即用。
+服务器已预装C++调试有关工具（g++，make，以及代码编辑器等），开箱即用。
 
 #### 命令行调试
 
-简单的跑已经完善的代码收集数据，不需要进行排错的情况下可以使用命令行进行。
-
-make+gdb
+简单地跑已经完善的代码收集数据，不需要进行排错的情况下可以使用命令行进行。（make+gdb）
 
 //todo
 
 #### vscode+cmake+ssh_remote 本地+远程调试
 
-在本机vscode打开远程工程，支持远程编辑+调试。远程搬砖利器，除了不能显示程序跑出来的图形，写代码/调试体验和本机使用vsocode基本无异。
+可在本机 vscode 打开远程工程，支持远程编辑+调试。远程搬砖利器，除了不能显示程序跑出来的图形，写代码/调试体验和本机使用 vsocode 基本无异。
 
 ##### 设置流程
 
@@ -224,7 +228,7 @@ make+gdb
 
 *设置了ssh免密后远程调试亦免密。*
 
-CMake设置可参见
+CMake在C++开发的时候可以视作是make的高级一层抽象，通过简单的几句CMake命令即可自动生成makefile文件，从而轻松完成工程的编译链接工作。
 
 ### python
 
@@ -244,6 +248,24 @@ CMake设置可参见
 
 ### 系统工具
 
+#### 命令行下的文本编辑器
+
+##### nano
+
+入门级文本编辑器，功能简单上手快，编辑一般配置文件足够，前文中已有用到。
+
+``` 
+nano {文件路径}
+```
+
+##### vim
+
+高级文本编辑器，功能强大，扩展丰富，用于命令行下的代码编辑。对初学者而言操作方式较为拧巴。
+
+``` 
+vim {文件路径}
+```
+
 #### 软件安装
 
 ##### apt
@@ -260,7 +282,7 @@ CMake设置可参见
 
 `apt upgrade` 更新已安装软件
 
-*需要sudo权限*
+*需要 `sudo` 权限*
 
 ###### 更改镜像源
 
@@ -286,7 +308,7 @@ CMake设置可参见
 
 ### git图形工具
 
-git协作时没有图形很难受， git log --graph的输出太简陋且不美观。
+git协作时没有图形很难受， `git log --graph` 的输出太简陋且不美观。
 
 #### Sourcetree
 
@@ -308,13 +330,48 @@ vscode本身自带git支持，
 
 ### 其他软件 
 
-#### 矢量图绘图工具inkscape
+#### 矢量图绘图工具Inkscape
 
 Adobe Illustrator的良好替代。
 
 #### 位图编辑工具GIMP
 
 Adobe Photoshop的良好替代。
+
+#### Linux下运行Windows软件 - Wine
+
+很强，实测可以运行StarCraft II及一系列Windows下的游戏。以及Matlab，PS等实用软件。如果想使用Linux或者Mac OS进行日常工作同时使用某些Windows平台上的软件，可以考虑Wine。
+
+不过具体使用之前需要在官网上查看支持信息以及安装对应版本的Wine -- 它并不是越新越好。
+
+## 经验分享
+
+### Linux下命令行运行软件很别扭不知如何下手？
+
+首先，一般运行命令大抵依如下格式：
+
+``` 
+{命令} [选项] [参数] ...
+```
+
+以常用的 `ls` 命令为例：
+
+``` 
+ls -l /etc
+```
+
+* `ls` 即为列出指定路径下文件及文件夹的命令
+* `-l` 是一个选项，表明文件信息将以详细列表格式（long listing format）显示，如不设定 `-l` ，则文件将仅显示文件名
+* `/etc` 即为该命令的执行对象（参数），为Linux下储存各种配置的路径 `/etc` .
+
+整个命令的含义即为以详细列表格式显示 `/etc` 下的所有文件及文件夹
+
+其次，在了解调用形式之后，当我们**知道我们要使用的命令名但不知道具体用法（比如不说的话没人知道ls有 `-l` 、 `-A` 等一系列选项）怎么办**？
+
+1. 搜索引擎
+2. 输入 `{命令名} --help` 即可显示该命令用法（一个单词的命令行参数一般以两个“ `-` ”开头）
+
+常用help，万事不求人。
 
 ## 相关资源及链接
 
@@ -326,6 +383,10 @@ https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-expl
 
 https://github.com/monarchBacilluscoli/test_project_vscode_linux
 
+5. CMake入门好文
+
+https://www.hahack.com/codes/cmake/
+
 3. 蒲公英VPN
 
 https://pgy.oray.com/download/
@@ -334,6 +395,6 @@ https://pgy.oray.com/download/
 
 https://code.visualstudio.com/docs/remote/ssh
 
-5. CMake入门好文
+6. Samba教程
 
-https://www.hahack.com/codes/cmake/
+https://ubuntu.com/tutorials/install-and-configure-samba#3-setting-up-samba
