@@ -206,16 +206,21 @@ scp {本地文件} {用户名}@{服务器IP}:{服务器路径}
 
 make+gdb
 
+//todo
+
 #### vscode+cmake+ssh_remote 本地+远程调试
 
 在本机vscode打开远程工程，支持远程编辑+调试。远程搬砖利器，除了不能显示程序跑出来的图形，写代码/调试体验和本机使用vsocode基本无异。
 
 ##### 设置流程
 
-1. 打开 vscode，点击左侧”Extension“打开扩展栏
-2. 搜索并安装”Remote-SSH“扩展
-3. 按照提示重启vscode
+1. 保证服务器安装了 vscode
+1. 客户机打开 vscode，点击左侧 Extension 打开扩展栏
+2. 搜索并安装 Remote-SSH 扩展
+3. 按照提示重启 vscode
 4. 点击 vscode 左下的蓝色标志，选择 Remote-SSH: Connect to Host 
+5. 输入 `{你的用户名}@{服务器IP}` 即可连接。另外，[ssh免帐号及IP登录](#ssh免帐号及IP登录)中设置的host会显示在这里，如果有的话直接点击就可以连接
+6. 新的vscode窗口中左下方显示连接的主机信息即表示连接成功。此时该窗口相当于在服务器上打开的vscode，设置、扩展程序等将与服务器上的设置一致
 
 *设置了ssh免密后远程调试亦免密。*
 
