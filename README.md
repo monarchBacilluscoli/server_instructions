@@ -433,6 +433,12 @@ ls -l /etc
 
 ## 1.5. 相关资源及链接
 
+### 书籍资源
+
+1. Linux口袋书（图书馆可借，一本薄薄的小册子，包含了Linux日常使用所需的命令，我大致翻看了一下感觉命令行居然可以做这么多事，甚至可以打印。）
+
+### 网络资源
+
 1. linux系统目录结构
 
 https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/
